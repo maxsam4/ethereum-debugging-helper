@@ -1,0 +1,50 @@
+// ==UserScript==
+// @name     Kovan Debug helper
+// @version  1
+// @include  https://kovan.etherscan.io/vmtrace*
+// @grant    none
+// @author   Mudit Gupta
+// ==/UserScript==
+
+// Creates the Show Details button
+let nav = document.getElementsByClassName("col-md-12");
+let button = document.createElement("input");
+button.type = "button";
+button.value = "Show Details";
+button.onclick = showDetails;
+nav[0].appendChild(button);
+
+let functionHashes = new Map();
+
+// This is where magic happens
+function showDetails() {
+  let details = document.getElementsByClassName("blind");
+  for (let i = 0; i < details.length; i++) {
+    details[i].style.display = "table-row-group";
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    td.style = "white-space: nowrap;width: -moz-max-content";
+    let td1 = document.createElement("td");
+    let td2 = document.createElement("td");
+    td1.innerHTML = "Decoded Input";
+    tr.appendChild(td);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    let inputFunction = details[i].getElementsByTagName("textarea")[0];
+    details[i].appendChild(tr);
+    if (functionHashes.has(inputFunction.innerHTML.substr(2, 8))) {
+      td2.innerHTML = "Function: " + functionHashes.get(inputFunction.innerHTML.substr(2, 8)); //+ " of " functionContracts.get(inputFunction.innerHTML.substr(2,8));
+    }
+  }
+}
+
+
+// Replace these with your hashes
+functionHashes.set('18160ddd', 'totalSupply()');
+functionHashes.set('a9059cbb', 'transfer(address,uint256)');
+functionHashes.set('70a08231', 'balanceOf(address)');
+functionHashes.set('06fdde03', 'name()');
+functionHashes.set('095ea7b3', 'approve(address,uint256)');
+functionHashes.set('23b872dd', 'transferFrom(address,address,uint256)');
+functionHashes.set('313ce567', 'decimals()');
+functionHashes.set('95d89b41', 'symbol()');
