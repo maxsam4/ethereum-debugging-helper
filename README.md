@@ -3,6 +3,7 @@ This is a tiny script that helps in debugging solidity smart contracts on kovan 
 
 ## extract.py
 It is a python script extracts abi, bytecode and function hashes from the build file that solidity compiler generates
+Note: For windows, use extract-windows.py
 
 #### How to use
 1. Copy the script to your project folder such that the build files reside in /build/contracts from the script's location (where truffle config, package,json etc reside in a default structure).
