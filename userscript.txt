@@ -7,12 +7,12 @@
 // ==/UserScript==
 
 // Creates the Show Details button
-let nav = document.getElementsByClassName("col-md-12");
+let nav = document.getElementsByClassName("card-body");
 let button = document.createElement("input");
 button.type = "button";
 button.value = "Show Details";
 button.onclick = showDetails;
-nav[0].appendChild(button);
+nav[0].prepend(button);
 
 let functionHashes = new Map();
 
